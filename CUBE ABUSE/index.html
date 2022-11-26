@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUBE ABUSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen&display=swap" rel="stylesheet"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #timer {
+            font-family:  'Koulen', cursive;
+            position: absolute;
+            top: 10%;
+            left: 48%;
+            background: transparent;
+            width: fit-content;
+            height: fit-content;
+            font-size: 3rem;
+            transition-duration: 100ms;
+        }
+
+        #goagain:hover {
+            border: 1px 5px green;
+            text-shadow: 0px 0px 5px rgb(0, 159, 0);
+            font-size: 3.1rem;
+            cursor:pointer;
+        }
+        #newlvl:hover {
+            border: 1px 5px red;
+            text-shadow: 0px 0px 5px rgb(255, 24, 24);
+            font-size: 3.1rem;
+            cursor:pointer;
+        }
+        #mainBtn:hover {
+            border: 1px 5px purple;
+            text-shadow: 0px 0px 5px rgba(106, 0, 255, 0.919);
+            font-size: 3.1rem;
+            cursor:pointer;
+        }
+
+        #playNorm {
+            cursor: pointer;
+            transition-duration: 100ms;
+            position: absolute;
+            top: 40%;
+            left: 43%;
+            width: fit-content;
+        }
+        #playEnd {
+            cursor: pointer;
+            transition-duration: 100ms;
+            position: absolute;
+            top: 30%;
+            left: 43%;
+            width: fit-content;
+        }
+        #highscore {
+            position: absolute;
+            color: black;
+            font-size: 1.5rem;
+            top: 29%;
+            left: 45%;
+            transition-duration: 100ms;
+        }
+        #shop {
+            cursor: pointer;
+            position: absolute;
+            transition-duration: 100ms;
+            position: absolute;
+            top: 50%;
+            left: 48%;
+            width: fit-content;
+        }
+        #achievements {
+            position: absolute;
+            top: 60%;
+            left: 43%;
+            transition-duration: 100ms;
+            cursor: pointer;
+        }
+        #quit {
+            cursor: pointer;
+            position: absolute;
+            transition-duration: 100ms;
+            position: absolute;
+            top: 70%;
+            left: 48%;
+            width: fit-content;
+        }
+        #playNorm:hover {
+            text-shadow: 0px 0px 5px black;
+            font-size: 4.25rem;
+            top: 39%;
+            left: 42.9%;
+        }
+        #playEnd:hover {
+            text-shadow: 0px 0px 5px black;
+            font-size: 4.25rem;
+            top: 29%;
+            left: 42.9%;
+        }
+        #highscore:hover {
+            text-shadow: 0px 0px 3px black;
+            font-size: 1.75rem;
+            top: 28.5%;
+            left: 44.5%;
+        }
+        #shop:hover {
+            text-shadow: 0px 0px 5px black;
+            font-size: 4.25rem;
+            top: 49%;
+            left: 47.9%;
+        }
+        #achievements:hover {
+            text-shadow: 0px 0px 5px black;
+            font-size: 4.25rem;
+            top: 59%;
+            left: 44%;
+        }
+        #quit:hover {
+            text-shadow: 0px 0px 5px black;
+            font-size: 4.25rem;
+            top: 69%;
+            left: 47.9%;
+        }
+        #title {
+            cursor: pointer;
+            transition-duration: 100ms;
+            position: absolute;
+            top: 9%;
+            left: 44%;
+            width: fit-content;
+            text-shadow: 0px 0px 10px grey;
+            color: rgb(35, 35, 35);
+        }
+
+        #shopUI {
+            position: absolute;
+            width: 80%;
+            height: 70%;
+            background-color: rgba(106, 106, 106, 0.755);
+            left: 11%;
+            top: 10%;
+            transform: scale(0);
+            transition-duration: 100ms;
+        }
+
+        #achieveUI {
+            position: absolute;
+            width: 80%;
+            height: 70%;
+            background-color: rgba(106, 106, 106, 0.755);
+            left: 11%;
+            top: 10%;
+            transform: scale(0);
+            transition-duration: 100ms;
+        }
+
+        #shopBack {
+            position: absolute;
+            top: 95%;
+            left: 48%;
+            font-family:   'Koulen', cursive;
+            font-size: 4rem;
+            color: rgb(54, 54, 54);
+            cursor: pointer;
+            transition-duration: 100ms;
+            transform: scale(0);
+        }
+        #shopBack:hover {
+            text-shadow: 0px 0px 5px black;
+            font-size: 4.25rem;
+            top: 94%;
+            left: 47.9%;
+        }
+
+        #credits {
+            position: absolute;
+            transition-duration: 200ms;
+            top: 90%;
+            left: 47%;
+            font-family:  'Koulen', cursive;
+            font-size: 2rem;
+            color: rgb(179, 152, 0);
+            text-shadow: 0px 0px 8px gold;
+        }
+    </style>
+
+    <div id="timer">timer not started</div>
+
+    <div id="mainMenu" class="menu active" style="
+    font-family:   'Koulen', cursive;
+    font-size: 4rem;
+    color: rgb(94, 94, 94);
+    ">
+        <span id="title">CUBE ABUSE</span>
+        <span id="playNorm">PLAY NORMAL</span>
+        <span id="playEnd">PLAY ENDLESS</span><span id="highscore">HIGHSCORE: Null</span>
+        <span id="shop">SHOP</span>
+        <span id="achievements">ACHIEVEMENTS</span>
+        <span id="quit">QUIT</span>
+    </div>
+
+    <div id="shopUI">
+        <div id="shopTabs">
+            <ul class="nav nav-tabs">
+                <style>
+                    
+                </style>
+
+                <li id="test" class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled">Disabled</a>
+                </li>
+              </ul>
+        </div>
+        <div id="mainUi"></div>
+        <div id="shopBack">BACK</div>
+    </div>
+
+    <div id="achieveUI">
+        
+    </div>
+
+    <div id="credits"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+    <script src="http://sole.github.io/tween.js/build/tween.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="./utils.js"></script>
+    <script src="./credits.js"></script>
+    <script src="./mainMenu.js"></script>
+    <script src="./shop.js"></script>
+    <script src="./index.js"></script>
+    <script src="./winLose.js"></script>
+    <script src="./timer.js"></script>
+
+</body>
+</html>
